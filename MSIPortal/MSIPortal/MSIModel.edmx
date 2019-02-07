@@ -1,0 +1,727 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MSIPortalModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="MSIPortalModelStoreContainer">
+          <EntitySet Name="LU_tbl_Category" EntityType="MSIPortalModel.Store.LU_tbl_Category" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LU_tbl_City" EntityType="MSIPortalModel.Store.LU_tbl_City" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LU_tbl_Country" EntityType="MSIPortalModel.Store.LU_tbl_Country" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LU_tbl_ProductServiceType" EntityType="MSIPortalModel.Store.LU_tbl_ProductServiceType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="MSIPortalModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_Post" EntityType="MSIPortalModel.Store.tbl_Post" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_PostCar" EntityType="MSIPortalModel.Store.tbl_PostCar" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_Question" EntityType="MSIPortalModel.Store.tbl_Question" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_User" EntityType="MSIPortalModel.Store.tbl_User" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_UserPassword" EntityType="MSIPortalModel.Store.tbl_UserPassword" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_LU_tbl_City_LU_tbl_Country" Association="MSIPortalModel.Store.FK_LU_tbl_City_LU_tbl_Country">
+            <End Role="LU_tbl_Country" EntitySet="LU_tbl_Country" />
+            <End Role="LU_tbl_City" EntitySet="LU_tbl_City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Post_LU_tbl_Category" Association="MSIPortalModel.Store.FK_tbl_Post_LU_tbl_Category">
+            <End Role="LU_tbl_Category" EntitySet="LU_tbl_Category" />
+            <End Role="tbl_Post" EntitySet="tbl_Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Post_LU_tbl_City" Association="MSIPortalModel.Store.FK_tbl_Post_LU_tbl_City">
+            <End Role="LU_tbl_City" EntitySet="LU_tbl_City" />
+            <End Role="tbl_Post" EntitySet="tbl_Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Post_LU_tbl_ProductServiceType" Association="MSIPortalModel.Store.FK_tbl_Post_LU_tbl_ProductServiceType">
+            <End Role="LU_tbl_ProductServiceType" EntitySet="LU_tbl_ProductServiceType" />
+            <End Role="tbl_Post" EntitySet="tbl_Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Post_tbl_User" Association="MSIPortalModel.Store.FK_tbl_Post_tbl_User">
+            <End Role="tbl_User" EntitySet="tbl_User" />
+            <End Role="tbl_Post" EntitySet="tbl_Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_User_LU_tbl_City" Association="MSIPortalModel.Store.FK_tbl_User_LU_tbl_City">
+            <End Role="LU_tbl_City" EntitySet="LU_tbl_City" />
+            <End Role="tbl_User" EntitySet="tbl_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_UserPassword_tbl_User" Association="MSIPortalModel.Store.FK_tbl_UserPassword_tbl_User">
+            <End Role="tbl_User" EntitySet="tbl_User" />
+            <End Role="tbl_UserPassword" EntitySet="tbl_UserPassword" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="LU_tbl_Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="nchar" Nullable="false" MaxLength="4" />
+          <Property Name="ParentCatID" Type="nchar" MaxLength="10" />
+          <Property Name="CategoryName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="EditUser" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EditDate" Type="datetime" Nullable="false" />
+          <Property Name="PSTID" Type="nchar" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="LU_tbl_City">
+          <Key>
+            <PropertyRef Name="CityID" />
+          </Key>
+          <Property Name="CityID" Type="nchar" Nullable="false" MaxLength="3" />
+          <Property Name="CountryID" Type="nchar" MaxLength="3" />
+          <Property Name="CityName" Type="nvarchar" MaxLength="50" />
+          <Property Name="EditUser" Type="uniqueidentifier" />
+          <Property Name="EditDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="LU_tbl_Country">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="nchar" Nullable="false" MaxLength="3" />
+          <Property Name="CountryName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="EditUser" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EditDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LU_tbl_ProductServiceType">
+          <Key>
+            <PropertyRef Name="PSTypeID" />
+          </Key>
+          <Property Name="PSTypeID" Type="nchar" Nullable="false" MaxLength="3" />
+          <Property Name="ProductServiceType" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="EditUser" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EditDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tbl_Post">
+          <Key>
+            <PropertyRef Name="PostID" />
+          </Key>
+          <Property Name="PostID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CategoryID" Type="nchar" Nullable="false" MaxLength="4" />
+          <Property Name="CityID" Type="nchar" Nullable="false" MaxLength="3" />
+          <Property Name="PSTID" Type="nchar" Nullable="false" MaxLength="3" />
+          <Property Name="PostTitle" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="PostDescription" Type="ntext" Nullable="false" />
+          <Property Name="ImageUrl" Type="nvarchar" MaxLength="300" />
+          <Property Name="PostingUserID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ProviderFirstName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ProviderLastName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ProviderAddress" Type="varchar" MaxLength="50" />
+          <Property Name="ProviderEmail" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ProviderPhoneNo" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Approved" Type="bit" Nullable="false" />
+          <Property Name="Rank" Type="int" Nullable="false" />
+          <Property Name="EditUser" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EditDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_PostCar">
+          <Key>
+            <PropertyRef Name="PostId" />
+          </Key>
+          <Property Name="PostId" Type="nchar" Nullable="false" MaxLength="10" />
+          <Property Name="BrandName" Type="varchar" MaxLength="50" />
+          <Property Name="Model" Type="varchar" MaxLength="50" />
+          <Property Name="Year" Type="varchar" MaxLength="50" />
+          <Property Name="RegistrationYear" Type="varchar" MaxLength="50" />
+          <Property Name="BodyType" Type="varchar" MaxLength="50" />
+          <Property Name="Condition" Type="varchar" MaxLength="50" />
+          <Property Name="Transmission" Type="varchar" MaxLength="50" />
+          <Property Name="FuelType" Type="varchar" MaxLength="50" />
+          <Property Name="EngineCapacity" Type="varchar" MaxLength="50" />
+          <Property Name="Milage" Type="varchar" MaxLength="50" />
+          <Property Name="EditUser" Type="uniqueidentifier" />
+          <Property Name="EditDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbl_Question">
+          <Key>
+            <PropertyRef Name="QuestionID" />
+          </Key>
+          <Property Name="QuestionID" Type="nchar" Nullable="false" MaxLength="2" />
+          <Property Name="Question" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="EditUser" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EditDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LoginName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="RoleID" Type="nchar" Nullable="false" MaxLength="3" />
+          <Property Name="CityID" Type="nchar" Nullable="false" MaxLength="3" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="EditUser" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EditDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_UserPassword">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="EditUser" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EditDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_LU_tbl_City_LU_tbl_Country">
+          <End Role="LU_tbl_Country" Type="MSIPortalModel.Store.LU_tbl_Country" Multiplicity="0..1" />
+          <End Role="LU_tbl_City" Type="MSIPortalModel.Store.LU_tbl_City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LU_tbl_Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="LU_tbl_City">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Post_LU_tbl_Category">
+          <End Role="LU_tbl_Category" Type="MSIPortalModel.Store.LU_tbl_Category" Multiplicity="1" />
+          <End Role="tbl_Post" Type="MSIPortalModel.Store.tbl_Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LU_tbl_Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="tbl_Post">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Post_LU_tbl_City">
+          <End Role="LU_tbl_City" Type="MSIPortalModel.Store.LU_tbl_City" Multiplicity="1" />
+          <End Role="tbl_Post" Type="MSIPortalModel.Store.tbl_Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LU_tbl_City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="tbl_Post">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Post_LU_tbl_ProductServiceType">
+          <End Role="LU_tbl_ProductServiceType" Type="MSIPortalModel.Store.LU_tbl_ProductServiceType" Multiplicity="1" />
+          <End Role="tbl_Post" Type="MSIPortalModel.Store.tbl_Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LU_tbl_ProductServiceType">
+              <PropertyRef Name="PSTypeID" />
+            </Principal>
+            <Dependent Role="tbl_Post">
+              <PropertyRef Name="PSTID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Post_tbl_User">
+          <End Role="tbl_User" Type="MSIPortalModel.Store.tbl_User" Multiplicity="1" />
+          <End Role="tbl_Post" Type="MSIPortalModel.Store.tbl_Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tbl_Post">
+              <PropertyRef Name="PostingUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_User_LU_tbl_City">
+          <End Role="LU_tbl_City" Type="MSIPortalModel.Store.LU_tbl_City" Multiplicity="1" />
+          <End Role="tbl_User" Type="MSIPortalModel.Store.tbl_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LU_tbl_City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="tbl_User">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_UserPassword_tbl_User">
+          <End Role="tbl_User" Type="MSIPortalModel.Store.tbl_User" Multiplicity="1" />
+          <End Role="tbl_UserPassword" Type="MSIPortalModel.Store.tbl_UserPassword" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tbl_UserPassword">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MSIPortalModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="MSIPortalContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="LU_tbl_Country" EntityType="MSIPortalModel.LU_tbl_Country" />
+          <EntitySet Name="LU_tbl_ProductServiceType" EntityType="MSIPortalModel.LU_tbl_ProductServiceType" />
+          <EntitySet Name="sysdiagrams" EntityType="MSIPortalModel.sysdiagrams" />
+          <EntitySet Name="tbl_PostCar" EntityType="MSIPortalModel.tbl_PostCar" />
+          <EntitySet Name="tbl_Question" EntityType="MSIPortalModel.tbl_Question" />
+          <EntitySet Name="tbl_UserPassword" EntityType="MSIPortalModel.tbl_UserPassword" />
+          <EntitySet Name="tbl_Post" EntityType="MSIPortalModel.tbl_Post" />
+          <AssociationSet Name="FK_tbl_Post_LU_tbl_ProductServiceType" Association="MSIPortalModel.FK_tbl_Post_LU_tbl_ProductServiceType">
+            <End Role="LU_tbl_ProductServiceType" EntitySet="LU_tbl_ProductServiceType" />
+            <End Role="tbl_Post" EntitySet="tbl_Post" />
+          </AssociationSet>
+          <EntitySet Name="LU_tbl_City" EntityType="MSIPortalModel.LU_tbl_City" />
+          <EntitySet Name="tbl_User" EntityType="MSIPortalModel.tbl_User" />
+          <AssociationSet Name="FK_LU_tbl_City_LU_tbl_Country" Association="MSIPortalModel.FK_LU_tbl_City_LU_tbl_Country">
+            <End Role="LU_tbl_Country" EntitySet="LU_tbl_Country" />
+            <End Role="LU_tbl_City" EntitySet="LU_tbl_City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Post_LU_tbl_City" Association="MSIPortalModel.FK_tbl_Post_LU_tbl_City">
+            <End Role="LU_tbl_City" EntitySet="LU_tbl_City" />
+            <End Role="tbl_Post" EntitySet="tbl_Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_User_LU_tbl_City" Association="MSIPortalModel.FK_tbl_User_LU_tbl_City">
+            <End Role="LU_tbl_City" EntitySet="LU_tbl_City" />
+            <End Role="tbl_User" EntitySet="tbl_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Post_tbl_User" Association="MSIPortalModel.FK_tbl_Post_tbl_User">
+            <End Role="tbl_User" EntitySet="tbl_User" />
+            <End Role="tbl_Post" EntitySet="tbl_Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_UserPassword_tbl_User" Association="MSIPortalModel.FK_tbl_UserPassword_tbl_User">
+            <End Role="tbl_User" EntitySet="tbl_User" />
+            <End Role="tbl_UserPassword" EntitySet="tbl_UserPassword" />
+          </AssociationSet>
+          <EntitySet Name="LU_tbl_Category" EntityType="MSIPortalModel.LU_tbl_Category" />
+          <AssociationSet Name="FK_tbl_Post_LU_tbl_Category" Association="MSIPortalModel.FK_tbl_Post_LU_tbl_Category">
+            <End Role="LU_tbl_Category" EntitySet="LU_tbl_Category" />
+            <End Role="tbl_Post" EntitySet="tbl_Post" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="LU_tbl_Country">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Type="String" Name="CountryID" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="CountryName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Guid" Name="EditUser" Nullable="false" />
+          <Property Type="DateTime" Name="EditDate" Nullable="false" />
+          <NavigationProperty Name="LU_tbl_City" Relationship="MSIPortalModel.FK_LU_tbl_City_LU_tbl_Country" FromRole="LU_tbl_Country" ToRole="LU_tbl_City" />
+        </EntityType>
+        <EntityType Name="LU_tbl_ProductServiceType">
+          <Key>
+            <PropertyRef Name="PSTypeID" />
+          </Key>
+          <Property Type="String" Name="PSTypeID" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="ProductServiceType" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Guid" Name="EditUser" Nullable="false" />
+          <Property Type="DateTime" Name="EditDate" Nullable="false" />
+          <NavigationProperty Name="tbl_Post" Relationship="MSIPortalModel.FK_tbl_Post_LU_tbl_ProductServiceType" FromRole="LU_tbl_ProductServiceType" ToRole="tbl_Post" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tbl_PostCar">
+          <Key>
+            <PropertyRef Name="PostId" />
+          </Key>
+          <Property Type="String" Name="PostId" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="BrandName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Model" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Year" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RegistrationYear" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="BodyType" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Condition" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Transmission" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FuelType" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="EngineCapacity" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Milage" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Guid" Name="EditUser" />
+          <Property Type="DateTime" Name="EditDate" />
+        </EntityType>
+        <EntityType Name="tbl_Question">
+          <Key>
+            <PropertyRef Name="QuestionID" />
+          </Key>
+          <Property Type="String" Name="QuestionID" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Question" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Guid" Name="EditUser" Nullable="false" />
+          <Property Type="DateTime" Name="EditDate" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_UserPassword">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Type="Guid" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Guid" Name="EditUser" Nullable="false" />
+          <Property Type="DateTime" Name="EditDate" Nullable="false" />
+          <NavigationProperty Name="tbl_User" Relationship="MSIPortalModel.FK_tbl_UserPassword_tbl_User" FromRole="tbl_UserPassword" ToRole="tbl_User" />
+        </EntityType>
+        <EntityType Name="tbl_Post">
+          <Key>
+            <PropertyRef Name="PostID" />
+          </Key>
+          <Property Type="Guid" Name="PostID" Nullable="false" />
+          <Property Type="String" Name="CategoryID" Nullable="false" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="CityID" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="PSTID" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="PostTitle" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PostDescription" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ImageUrl" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="Guid" Name="PostingUserID" Nullable="false" />
+          <Property Type="String" Name="ProviderFirstName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ProviderLastName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ProviderAddress" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ProviderEmail" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ProviderPhoneNo" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="Approved" Nullable="false" />
+          <Property Type="Int32" Name="Rank" Nullable="false" />
+          <Property Type="Guid" Name="EditUser" Nullable="false" />
+          <Property Type="DateTime" Name="EditDate" Nullable="false" />
+          <NavigationProperty Name="LU_tbl_ProductServiceType" Relationship="MSIPortalModel.FK_tbl_Post_LU_tbl_ProductServiceType" FromRole="tbl_Post" ToRole="LU_tbl_ProductServiceType" />
+          <NavigationProperty Name="LU_tbl_City" Relationship="MSIPortalModel.FK_tbl_Post_LU_tbl_City" FromRole="tbl_Post" ToRole="LU_tbl_City" />
+          <NavigationProperty Name="tbl_User" Relationship="MSIPortalModel.FK_tbl_Post_tbl_User" FromRole="tbl_Post" ToRole="tbl_User" />
+          <NavigationProperty Name="LU_tbl_Category" Relationship="MSIPortalModel.FK_tbl_Post_LU_tbl_Category" FromRole="tbl_Post" ToRole="LU_tbl_Category" />
+        </EntityType>
+        <Association Name="FK_tbl_Post_LU_tbl_ProductServiceType">
+          <End Type="MSIPortalModel.LU_tbl_ProductServiceType" Role="LU_tbl_ProductServiceType" Multiplicity="1" />
+          <End Type="MSIPortalModel.tbl_Post" Role="tbl_Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LU_tbl_ProductServiceType">
+              <PropertyRef Name="PSTypeID" />
+            </Principal>
+            <Dependent Role="tbl_Post">
+              <PropertyRef Name="PSTID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LU_tbl_City">
+          <Key>
+            <PropertyRef Name="CityID" />
+          </Key>
+          <Property Type="String" Name="CityID" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="CountryID" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="CityName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Guid" Name="EditUser" />
+          <Property Type="DateTime" Name="EditDate" />
+          <NavigationProperty Name="LU_tbl_Country" Relationship="MSIPortalModel.FK_LU_tbl_City_LU_tbl_Country" FromRole="LU_tbl_City" ToRole="LU_tbl_Country" />
+          <NavigationProperty Name="tbl_Post" Relationship="MSIPortalModel.FK_tbl_Post_LU_tbl_City" FromRole="LU_tbl_City" ToRole="tbl_Post" />
+          <NavigationProperty Name="tbl_User" Relationship="MSIPortalModel.FK_tbl_User_LU_tbl_City" FromRole="LU_tbl_City" ToRole="tbl_User" />
+        </EntityType>
+        <EntityType Name="tbl_User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Type="Guid" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="LoginName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="RoleID" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="CityID" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="Guid" Name="EditUser" Nullable="false" />
+          <Property Type="DateTime" Name="EditDate" Nullable="false" />
+          <NavigationProperty Name="LU_tbl_City" Relationship="MSIPortalModel.FK_tbl_User_LU_tbl_City" FromRole="tbl_User" ToRole="LU_tbl_City" />
+          <NavigationProperty Name="tbl_Post" Relationship="MSIPortalModel.FK_tbl_Post_tbl_User" FromRole="tbl_User" ToRole="tbl_Post" />
+          <NavigationProperty Name="tbl_UserPassword" Relationship="MSIPortalModel.FK_tbl_UserPassword_tbl_User" FromRole="tbl_User" ToRole="tbl_UserPassword" />
+        </EntityType>
+        <Association Name="FK_LU_tbl_City_LU_tbl_Country">
+          <End Type="MSIPortalModel.LU_tbl_Country" Role="LU_tbl_Country" Multiplicity="0..1" />
+          <End Type="MSIPortalModel.LU_tbl_City" Role="LU_tbl_City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LU_tbl_Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="LU_tbl_City">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Post_LU_tbl_City">
+          <End Type="MSIPortalModel.LU_tbl_City" Role="LU_tbl_City" Multiplicity="1" />
+          <End Type="MSIPortalModel.tbl_Post" Role="tbl_Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LU_tbl_City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="tbl_Post">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_User_LU_tbl_City">
+          <End Type="MSIPortalModel.LU_tbl_City" Role="LU_tbl_City" Multiplicity="1" />
+          <End Type="MSIPortalModel.tbl_User" Role="tbl_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LU_tbl_City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="tbl_User">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Post_tbl_User">
+          <End Type="MSIPortalModel.tbl_User" Role="tbl_User" Multiplicity="1" />
+          <End Type="MSIPortalModel.tbl_Post" Role="tbl_Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tbl_Post">
+              <PropertyRef Name="PostingUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_UserPassword_tbl_User">
+          <End Type="MSIPortalModel.tbl_User" Role="tbl_User" Multiplicity="1" />
+          <End Type="MSIPortalModel.tbl_UserPassword" Role="tbl_UserPassword" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tbl_UserPassword">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LU_tbl_Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Type="String" Name="CategoryID" Nullable="false" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="ParentCatID" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="CategoryName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Guid" Name="EditUser" Nullable="false" />
+          <Property Type="DateTime" Name="EditDate" Nullable="false" />
+          <Property Type="String" Name="PSTID" MaxLength="3" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="tbl_Post" Relationship="MSIPortalModel.FK_tbl_Post_LU_tbl_Category" FromRole="LU_tbl_Category" ToRole="tbl_Post" />
+        </EntityType>
+        <Association Name="FK_tbl_Post_LU_tbl_Category">
+          <End Type="MSIPortalModel.LU_tbl_Category" Role="LU_tbl_Category" Multiplicity="1" />
+          <End Type="MSIPortalModel.tbl_Post" Role="tbl_Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LU_tbl_Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="tbl_Post">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MSIPortalModelStoreContainer" CdmEntityContainer="MSIPortalContext">
+          <EntitySetMapping Name="LU_tbl_Country">
+            <EntityTypeMapping TypeName="MSIPortalModel.LU_tbl_Country">
+              <MappingFragment StoreEntitySet="LU_tbl_Country">
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditUser" ColumnName="EditUser" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LU_tbl_ProductServiceType">
+            <EntityTypeMapping TypeName="MSIPortalModel.LU_tbl_ProductServiceType">
+              <MappingFragment StoreEntitySet="LU_tbl_ProductServiceType">
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditUser" ColumnName="EditUser" />
+                <ScalarProperty Name="ProductServiceType" ColumnName="ProductServiceType" />
+                <ScalarProperty Name="PSTypeID" ColumnName="PSTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MSIPortalModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_PostCar">
+            <EntityTypeMapping TypeName="MSIPortalModel.tbl_PostCar">
+              <MappingFragment StoreEntitySet="tbl_PostCar">
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditUser" ColumnName="EditUser" />
+                <ScalarProperty Name="Milage" ColumnName="Milage" />
+                <ScalarProperty Name="EngineCapacity" ColumnName="EngineCapacity" />
+                <ScalarProperty Name="FuelType" ColumnName="FuelType" />
+                <ScalarProperty Name="Transmission" ColumnName="Transmission" />
+                <ScalarProperty Name="Condition" ColumnName="Condition" />
+                <ScalarProperty Name="BodyType" ColumnName="BodyType" />
+                <ScalarProperty Name="RegistrationYear" ColumnName="RegistrationYear" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Question">
+            <EntityTypeMapping TypeName="MSIPortalModel.tbl_Question">
+              <MappingFragment StoreEntitySet="tbl_Question">
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditUser" ColumnName="EditUser" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_UserPassword">
+            <EntityTypeMapping TypeName="MSIPortalModel.tbl_UserPassword">
+              <MappingFragment StoreEntitySet="tbl_UserPassword">
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditUser" ColumnName="EditUser" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Post">
+            <EntityTypeMapping TypeName="MSIPortalModel.tbl_Post">
+              <MappingFragment StoreEntitySet="tbl_Post">
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditUser" ColumnName="EditUser" />
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="ProviderPhoneNo" ColumnName="ProviderPhoneNo" />
+                <ScalarProperty Name="ProviderEmail" ColumnName="ProviderEmail" />
+                <ScalarProperty Name="ProviderAddress" ColumnName="ProviderAddress" />
+                <ScalarProperty Name="ProviderLastName" ColumnName="ProviderLastName" />
+                <ScalarProperty Name="ProviderFirstName" ColumnName="ProviderFirstName" />
+                <ScalarProperty Name="PostingUserID" ColumnName="PostingUserID" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="PostDescription" ColumnName="PostDescription" />
+                <ScalarProperty Name="PostTitle" ColumnName="PostTitle" />
+                <ScalarProperty Name="PSTID" ColumnName="PSTID" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="PostID" ColumnName="PostID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LU_tbl_City">
+            <EntityTypeMapping TypeName="MSIPortalModel.LU_tbl_City">
+              <MappingFragment StoreEntitySet="LU_tbl_City">
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditUser" ColumnName="EditUser" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_User">
+            <EntityTypeMapping TypeName="MSIPortalModel.tbl_User">
+              <MappingFragment StoreEntitySet="tbl_User">
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditUser" ColumnName="EditUser" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LU_tbl_Category">
+            <EntityTypeMapping TypeName="MSIPortalModel.LU_tbl_Category">
+              <MappingFragment StoreEntitySet="LU_tbl_Category">
+                <ScalarProperty Name="PSTID" ColumnName="PSTID" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditUser" ColumnName="EditUser" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="ParentCatID" ColumnName="ParentCatID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="MSIModel" ZoomLevel="75">
+        <EntityTypeShape EntityType="MSIPortalModel.LU_tbl_Country" Width="1.5" PointX="9.75" PointY="5.875" Height="1.9802864583333317" />
+        <EntityTypeShape EntityType="MSIPortalModel.LU_tbl_ProductServiceType" Width="1.5" PointX="0.75" PointY="17.75" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="MSIPortalModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="1.5" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="MSIPortalModel.tbl_PostCar" Width="1.5" PointX="5.75" PointY="4.5" Height="3.5186979166666665" />
+        <EntityTypeShape EntityType="MSIPortalModel.tbl_Question" Width="1.5" PointX="7.75" PointY="1.5" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="MSIPortalModel.tbl_UserPassword" Width="1.5" PointX="3" PointY="10.375" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="MSIPortalModel.tbl_Post" Width="1.5" PointX="9.75" PointY="8.75" Height="5.0571093750000031" />
+        <AssociationConnector Association="MSIPortalModel.FK_tbl_Post_LU_tbl_ProductServiceType" >
+          <ConnectorPoint PointX="1.5" PointY="17.75" />
+          <ConnectorPoint PointX="1.5" PointY="9.53125" />
+          <ConnectorPoint PointX="1.7916666666666667" PointY="9.53125" />
+          <ConnectorPoint PointX="1.9583333333333333" PointY="9.53125" />
+          <ConnectorPoint PointX="3.6666666666666665" PointY="9.53125" />
+          <ConnectorPoint PointX="3.8333333333333335" PointY="9.53125" />
+          <ConnectorPoint PointX="9.75" PointY="9.53125" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="MSIPortalModel.LU_tbl_City" Width="1.5" PointX="12" PointY="5.625" Height="2.5571907552083308" />
+        <EntityTypeShape EntityType="MSIPortalModel.tbl_User" Width="1.5" PointX="14.25" PointY="5.25" Height="3.3263964843750022" />
+        <AssociationConnector Association="MSIPortalModel.FK_LU_tbl_City_LU_tbl_Country" >
+          <ConnectorPoint PointX="11.25" PointY="6.8651432291666667" />
+          <ConnectorPoint PointX="12" PointY="6.8651432291666667" />
+        </AssociationConnector>
+        <AssociationConnector Association="MSIPortalModel.FK_tbl_Post_LU_tbl_City" >
+          <ConnectorPoint PointX="12.75" PointY="8.1821907552083317" />
+          <ConnectorPoint PointX="12.75" PointY="12.039128631350737" />
+          <ConnectorPoint PointX="11.25" PointY="12.039128631350737" />
+        </AssociationConnector>
+        <AssociationConnector Association="MSIPortalModel.FK_tbl_User_LU_tbl_City" >
+          <ConnectorPoint PointX="13.5" PointY="6.9035953776041659" />
+          <ConnectorPoint PointX="14.25" PointY="6.9035953776041659" />
+        </AssociationConnector>
+        <AssociationConnector Association="MSIPortalModel.FK_tbl_Post_tbl_User" >
+          <ConnectorPoint PointX="15" PointY="8.5763964843750031" />
+          <ConnectorPoint PointX="15" PointY="10.363311815675374" />
+          <ConnectorPoint PointX="12.833333333333334" PointY="10.363311815675374" />
+          <ConnectorPoint PointX="12.666666666666666" PointY="10.363311815675374" />
+          <ConnectorPoint PointX="11.25" PointY="10.363311815675374" />
+        </AssociationConnector>
+        <AssociationConnector Association="MSIPortalModel.FK_tbl_UserPassword_tbl_User" >
+          <ConnectorPoint PointX="4.125" PointY="8.4105436197916674" />
+          <ConnectorPoint PointX="3.75" PointY="8.4105436197916674" />
+          <ConnectorPoint PointX="3.75" PointY="10.375" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="MSIPortalModel.LU_tbl_Category" Width="1.5" PointX="0.75" PointY="1" Height="2.3648893229166745" />
+        <AssociationConnector Association="MSIPortalModel.FK_tbl_Post_LU_tbl_Category" >
+          <ConnectorPoint PointX="1.875" PointY="3.3648893229166745" />
+          <ConnectorPoint PointX="1.875" PointY="13.112447916666671" />
+          <ConnectorPoint PointX="9.75" PointY="13.112447916666671" />
+        </AssociationConnector>
+        </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
